@@ -72,7 +72,7 @@ talkButton.onclick = async function() {
   if (peerConnection && (peerConnection.signalingState === 'stable' || peerConnection.iceConnectionState === 'connected')) {
     const talkResponse = await fetch(`${DID_API.url}/talks/streams/${streamId}`, {
       method: 'POST',
-      headers: { Authorization: `Basic ${DID_API.key}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `Bearer ${DID_API.key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         'script': {
           'type': 'audio',
@@ -92,7 +92,7 @@ const destroyButton = document.getElementById('destroy-button');
 destroyButton.onclick = async function() {
   await fetch(`${DID_API.url}/talks/streams/${streamId}`, {
     method: 'DELETE',
-    headers: {Authorization: `Basic ${DID_API.key}`},
+    headers: {Authorization: `Bearer ${DID_API.key}`},
   }).catch(error => console.error('Error:', error));
 
   stopAllStreams();
